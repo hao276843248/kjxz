@@ -1,11 +1,12 @@
 import json
+import logging
 
 import requests
 from flask import Flask, request, jsonify, render_template, current_app
-import logging
 
 app = Flask(__name__)
-
+logging.basicConfig(level=logging.DEBUG)
+log = logging.getLogger(__name__)
 
 @app.route('/')
 def index():
@@ -36,7 +37,7 @@ def passHtml():
         )
         allData = json.loads(r2.text)
         url = "http://www.tantanjiujiu.com"
-        current_app.logger.inof(allData)
+        log.info(allData)
         if allData["kejianurl"]:
             rets.append({"name": "课件", "url": url + allData["kejianurl"]})
         if allData["jiaoxuesheji"]:
@@ -45,9 +46,9 @@ def passHtml():
             rets.append({"name": "学霸小测", "url": allData["xbpaper"]})
         if not rets:
             rets.append({"name": "解析错误", "url": ""})
-        current_app.logger.inof(rets)
+        log.info(rets)
     except Exception as e:
-        current_app.logger.error(e)
+        log.error(e)
     return jsonify(rets)
 
 
