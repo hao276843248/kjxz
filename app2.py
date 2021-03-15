@@ -29,7 +29,7 @@ def passHtml():
     ids = urls.split("=")[1]
     rets = []
     r2 = requests.post(
-        f"http://www.tantanjiujiu.com/tantanjiujiu/bookinfo/jiancha",
+        "http://www.tantanjiujiu.com/tantanjiujiu/bookinfo/jiancha",
         data={"kejianurl": ids}
     )
     allData = json.loads(r2.text)
