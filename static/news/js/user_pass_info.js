@@ -15,9 +15,10 @@ $(function () {
                 for (var i = 0; i < resp.length; i++) {
                     var urls1 = resp[i].url
                     var name = resp[i].name
+                    var username = resp[i].username
                     var del = '<a  href="'+urls1+'" target="_blank" class= "ia">下 载</a>'
                     var content = '<li>'
-                    content += '<div class="news_detail">' + name + '</div>'
+                    content += '<div class="news_detail">' + name +'    作者：'+ username+'</div>'
                     content += del
                     content += '</li>'
                     $(".list_con").append(content)
