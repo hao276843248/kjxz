@@ -8,6 +8,7 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger(__name__)
 
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -31,9 +32,13 @@ def passHtml():
         urls = url.split("&")
         urls = list(filter(lambda i: "id" in i, urls))[0]
         ids = urls.split("=")[1]
+        headers = {
+            "Content-Type": "application/raw"
+        }
         r2 = requests.post(
             "http://www.tantanjiujiu.com/tantanjiujiu/bookinfo/jiancha",
-            data={"kejianurl": ids}
+            data=json.dumps({"kejianurl": ids}),
+            headers=headers
         )
         allData = json.loads(r2.text)
         url = "http://www.tantanjiujiu.com"
